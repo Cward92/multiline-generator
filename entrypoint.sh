@@ -7,13 +7,29 @@ do
    instruction=$(shuf -i 0-4 -n 1)
    d=`date -Iseconds`
    case "$instruction" in
-      "1") echo "{\"@timestamp\": \"$d\", \"level\": \"ERROR\", \"message\": \"something happened in this execution.\"}"
+      "1") cat << EOF
+            $d level=ERROR, message=something happened in this execution.
+            This is a 2nd line
+            This is a 3rd line
+           EOF
       ;;
-      "2") echo "{\"@timestamp\": \"$d\", \"level\": \"INFO\", \"message\": \"takes the value and converts it to string.\"}"
+      "2") cat << EOF
+            $d level=INFO, message=Nothing to see here.
+            This is a 2nd line
+            This is a 3rd line
+           EOF
       ;;
-      "3") echo "{\"@timestamp\": \"$d\", \"level\": \"WARN\", \"message\": \"variable not in use.\"}"
+      "3") cat << EOF
+            $d level=WARNING, message=Another issue has occurred.
+            This is a 2nd line
+            This is a 3rd line
+           EOF
       ;;
-      "4") echo "{\"@timestamp\": \"$d\", \"level\": \"DEBUG\", \"message\": \"first loop completed.\"}"
+      "4") cat << EOF
+            $d level=DEBUG, message=something happened that should not have.
+            This is a 2nd line
+            This is a 3rd line
+           EOF
       ;;
    esac
 done
